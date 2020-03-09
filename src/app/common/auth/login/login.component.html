@@ -1,19 +1,43 @@
-<h2>Login</h2>
+<h2>{{ showSignup ? 'Sign Up' : 'Login' }}</h2>
 <form>
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-6"> 
       <label>User Name</label>
       <input type="text" class="form-control" [(ngModel)]="userName" name="userName" />
       <label>Password</label>
       <input type="password" class="form-control" [(ngModel)]="password" name="password" />
+      <ng-container *ngIf="showSignup">
+        <div class="form-check" style="padding:20px;">
+          <input class="form-check-input" type="checkbox" value="" ng-model="checked" (change)="checkbox()" id="admin">
+          <label class="form-check-label" for="admin">Check me if you are an Admin!</label>
+        </div>
+        <div *ngIf="!checked">
+          <label>Select Tavern</label>
+          <select class="form-control" [(ngModel)]="tavern" name="tavern">
+            <option [ngValue]="undefined" disabled>Select Tavern</option>
+            <option *ngFor="let tavern of Taverns" [ngValue]="tavern">{{tavern.Name}}</option>
+          </select>
+        </div>
+        <div *ngIf="checked">
+            <label>Enter Tavern Name</label>
+            <input type="text"  class="form-control" [(ngModel)]="tavern" name="tavern" />
+        </div>
+      </ng-container>
+      <!-- Add more text boxes for required fields -->
     </div>
     <div class="col-md-6"></div>
   </div>
   <br />
   <div class="row">
     <div class="col-md-6">
-      <button type="submit" class="btn btn-primary" (click)="login()">
+      <button *ngIf="!showSignup" type="submit" class="btn btn-primary" (click)="login()">
         Submit
+      </button>
+      <button *ngIf="showSignup" type="button" class="btn btn-primary" (click)="signup()">
+        Sign Up
+      </button>
+      <button type="button" class="btn btn-secondary float-right" (click)="toggleSignup()">
+        {{ showSignup ? 'Cancel' : 'Sign Up' }}
       </button>
     </div>
   </div>

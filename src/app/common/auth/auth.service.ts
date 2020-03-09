@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { CookieService } from 'ngx-cookie';
+import { create } from 'domain';
 
 export interface IUser {
     Id: number;
@@ -82,4 +83,10 @@ export class AuthService {
             this.cookieService.remove(tokenCookieKey);
         }
     }
+
+
+create(user: any): Observable<any> {
+   return this.http.post<any>('http://localhost:3000/users', user);
+    }
 }
+
