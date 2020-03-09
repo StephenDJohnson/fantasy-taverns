@@ -81,8 +81,9 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.authService.create(payload).subscribe(
             (user) => {
                 if (user) {
-                    this.router.navigateByUrl('/login');
+                    this.toggleSignup();
                     console.log('Successfuly Signed Up!');
+                    
                 }
             },
         (error) => {
