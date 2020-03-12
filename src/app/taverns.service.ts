@@ -4,8 +4,14 @@ import { Observable } from 'rxjs';
 
 
 export interface ITavern {
-  Id: number;
-  Name: string;
+  ID: number;
+  TavernName: string;
+}
+
+export interface IMyTavern {
+  TavernName: string;
+  RoomName: string;
+  DailyRate: Float32Array;
 }
 
 @Injectable({
@@ -16,6 +22,10 @@ export class TavernsService {
   constructor(private http: HttpClient) { }
 
   getTaverns(): Observable<ITavern[]>{
-    return this.http.get<ITavern[]> ('http://localhost:3000/Taverns');
+    return this.http.get<ITavern[]> ('http://localhost:3000/taverns');
+  }
+
+  getTavern(): Observable<IMyTavern[]>{
+    return this.http.get<IMyTavern[]> ('http://localhost:3000/rooms');
   }
 }

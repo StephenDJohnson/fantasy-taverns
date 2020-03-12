@@ -1,1 +1,15 @@
-<h2>Taverns</h2>
+<h2>{{tavern[0].TavernName}}</h2>
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Room Name</th>
+        <th scope="col">Daily Rate</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor='let t of tavern'>
+        <td>{{t.RoomName}}</td>
+        <td>{{t.DailyRate}}</td>
+      </tr>
+    </tbody>
+  </table>

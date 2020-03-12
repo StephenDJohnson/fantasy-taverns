@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { TavernsService } from '../taverns.service';
+import { TavernsService, IMyTavern } from '../taverns.service';
 
 @Component({
   templateUrl: './taverns.component.html'
@@ -7,10 +7,14 @@ import { TavernsService } from '../taverns.service';
 
 export class TavernsComponent implements OnInit {
 
+  tavern: IMyTavern[];
   constructor (private tavernsService: TavernsService) {}
 
   ngOnInit(): void{
-    this.tavernsService.getTaverns().subscribe();
+    this.tavernsService.getTavern().subscribe((returnedTavern) => {
+      this.tavern = returnedTavern;
+    });
+    console.log( this.tavern);
     }
 
 }

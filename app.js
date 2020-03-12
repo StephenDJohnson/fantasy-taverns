@@ -69,11 +69,10 @@ app.use((req, res, next) => {
 
 app.post('/users', userController.create);
 app.post('/login', userController.login);
-app.get(
-    '/my-tavern',
-   // passport.authenticate(jwt, { session: false }),
-    tavernController.getAll,
-    );
+app.get('/taverns', tavernController.getAll);
+app.get('/rooms', tavernController.getTavern);
+
+
 
 
 

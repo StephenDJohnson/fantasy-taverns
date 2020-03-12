@@ -9,7 +9,7 @@ import { TavernsComponent } from './Taverns/taverns.component';
 const appRoutes: Routes = [
     { path: 'login', component: LoginComponent },
     { path: 'home', component: TavernsComponent, canActivate: [AuthGuard] },
-    { path: '**', component: HomeComponent, canActivate: [AuthGuard] }
+    { path: '**', component: TavernsComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({

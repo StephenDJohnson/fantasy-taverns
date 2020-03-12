@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy} from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
+import { TavernsService, ITavern } from '../../../taverns.service';
 
 
 @Component({
@@ -14,32 +15,9 @@ export class LoginComponent implements OnInit, OnDestroy {
     showSignup = false;
     checked = false;
     role;
-    
+    taverns: ITavern[];
 
-    //Taverns Array
-    Taverns = [{
-        Id: 1,
-        Name: "Moe's Tavern"
-    },
-    {
-        Id: 2,
-        Name: "Joe's Tavern"
-    },
-    {
-        Id: 3,
-        Name: "Blasphemy Bar"
-    },
-    {
-        Id: 4,
-        Name: "Rejected Reality"
-    },
-    {
-        Id: 5,
-        Name: "Brianna's"
-    }];
-    selected: any;
-
-        constructor(private router: Router, private authService: AuthService) {}
+        constructor(private router: Router, private authService: AuthService, private tavernsService: TavernsService) {}
 
         //checkbox toggles admin checkbox and assigns role to 1 if user is admin
     checkbox(): void {
@@ -52,10 +30,13 @@ export class LoginComponent implements OnInit, OnDestroy {
             this.role = 1;
     }
     }
+
     ngOnInit(): void {
         console.log('comes into being');
-    }
-
+        this.tavernsService.getTaverns().subscribe((returnedTaverns) => {
+        this.taverns = returnedTaverns;
+    });
+}
     ngOnDestroy(): void {
         console.log('is destroyed');
     }
