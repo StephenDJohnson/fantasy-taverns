@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy} from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
-import { TavernsService, ITavern } from '../../../taverns.service';
+import { TavernsService, ITavern } from '../../../Taverns/taverns.service';
 
 
 @Component({

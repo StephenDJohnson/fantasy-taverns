@@ -1,4 +1,20 @@
 <h2>{{tavern[0].TavernName}}</h2>
+<div class="row form-group">
+    <div class="col-md-8">
+      <input type="text" class="form-control" id="search" (keyup)="search($event)" 
+      [(ngModel)]="searchText" placeholder="Enter text to Search for a Room...">
+    </div>
+    <div class="col-md-4">
+        <button class="btn btn-success"
+        type = "button"
+        [routerLink]="['modify-tavern']"
+        routerLinkActive="router-link-active">Add Room</button>
+    </div>
+    <div class="col-md-2">
+        <button class="btn btn-primary" style = "margin-top: 10px;">Search</button>
+    </div>
+</div>
+
 <table class="table">
     <thead>
       <tr>
@@ -8,8 +24,10 @@
     </thead>
     <tbody>
       <tr *ngFor='let t of tavern'>
-        <td>{{t.RoomName}}</td>
+        <td><a href="my-tavern/modify-tavern">{{t.RoomName}}</a></td>
         <td>{{t.DailyRate}}</td>
       </tr>
     </tbody>
   </table>
+
+  <!--<button type="button" class="btn btn-primary" (click)="addRoom()">Add Room</button>-->

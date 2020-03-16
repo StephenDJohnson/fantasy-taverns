@@ -12,12 +12,23 @@ export interface IMyTavern {
   TavernName: string;
   RoomName: string;
   DailyRate: Float32Array;
+  ID: number;
+  TavernID: number;
+  RoomStatus: number;
+}
+
+export interface IRoom {
+  RoomName: string;
+  DailyRate: Float32Array;
+  RoomStatus: number;
+  TavernID: number;
 }
 
 @Injectable({
   providedIn: 'root'
 })
 export class TavernsService {
+  
 
   constructor(private http: HttpClient) { }
 
@@ -25,7 +36,8 @@ export class TavernsService {
     return this.http.get<ITavern[]> ('http://localhost:3000/taverns');
   }
 
-  getTavern(): Observable<IMyTavern[]>{
-    return this.http.get<IMyTavern[]> ('http://localhost:3000/rooms');
+  getTavern(searchText: string): Observable<IMyTavern[]>{
+    return this.http.get<IMyTavern[]> (`http://localhost:3000/rooms?search=${searchText}`);
   }
 }
+

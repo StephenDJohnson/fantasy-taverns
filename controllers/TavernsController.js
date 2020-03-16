@@ -40,9 +40,10 @@ getTavern = async function(req, res) {
         tavern = await pool
             .request()
             .input('UserId', sql.Int, 6)
+            .input('RoomName', sql.VarChar, req.query.search)
             .query(
                 // eslint-disable-next-line quotes
-                'Select TavernName, RoomName, DailyRate FROM rooms r Join Taverns t on (t.ID = r.TavernID) Join Users u on (u.TavernID = t.ID)  Where u.ID = @UserId',
+                `Select TavernName, t.ID, RoomName, r.ID, DailyRate FROM rooms r Join Taverns t on (t.ID = r.TavernID) Join Users u on (u.TavernID = t.ID)  Where u.ID = @UserId and RoomName Like '%' + @RoomName + '%'`
             );
         tavern = tavern.recordset;
     } catch (e) {
