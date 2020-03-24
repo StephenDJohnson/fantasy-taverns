@@ -4,7 +4,8 @@ require('dotenv').config();
 require('./global_functions');
 const userController = require('./controllers/UsersController');
 const tavernController = require('./controllers/TavernsController');
-const roomController = require('./controllers/RoomsController')
+const roomController = require('./controllers/RoomsController');
+const guestController = require('./controllers/GuestsController');
 const bodyParser = require('body-parser');
 const passport = require('passport');
 const JwtStrategy = require('passport-jwt').Strategy;
@@ -72,19 +73,44 @@ app.post('/users', userController.create);
 app.post('/login', userController.login);
 app.post(
     '/rooms', 
-    //passport.authenticate('jwt', { session: false }), 
+    passport.authenticate('jwt', { session: false }), 
     roomController.addRoom
     );
+app.put(
+    `/rooms/:roomID`,
+    passport.authenticate('jwt', { session: false }), 
+    roomController.editRoom,
+);
 app.get(
     '/taverns', 
-    //passport.authenticate('jwt', { session: false }),
+    passport.authenticate('jwt', { session: false }),
     tavernController.getAll,
     );
 app.get(
     '/rooms', 
-    //passport.authenticate('jwt', { session: false }),
+    passport.authenticate('jwt', { session: false }),
     tavernController.getTavern,
+    tavernController.getRooms,
     ); 
+
+app.get(
+    '/rooms/book', 
+    passport.authenticate('jwt', { session: false }),
+    tavernController.getRooms,
+    ); 
+
+app.get(
+    '/rooms/:roomId', 
+    passport.authenticate('jwt', { session: false }),
+    tavernController.getById,
+    ); 
+
+app.get(
+'/users', 
+passport.authenticate('jwt', { session: false }),
+guestController.getGuests,
+); 
+
 
 
 console.log('SERVER READY');

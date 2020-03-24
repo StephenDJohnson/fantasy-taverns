@@ -15,7 +15,7 @@
           <label>Select Tavern</label>
           <select class="form-control" [(ngModel)]="tavern" name="tavern">
             <option [ngValue]="undefined" disabled>Select Tavern</option>
-            <option *ngFor='let tavern of taverns'>{{tavern.TavernName}}</option>
+            <option *ngFor='let tavern of taverns' [ngValue]="tavern">{{tavern.TavernName}}</option>
           </select>
         </div>
         <div *ngIf="checked">
@@ -23,7 +23,6 @@
             <input type="text"  class="form-control" [(ngModel)]="tavern" name="tavern" />
         </div>
       </ng-container>
-      <!-- Add more text boxes for required fields -->
     </div>
     <div class="col-md-6"></div>
   </div>

@@ -1,0 +1,27 @@
+<h2>Book a Stay!</h2>
+<form (submit)="book()">
+    <div class="row">
+        <div class="col-md-6">
+            <mat-form-field>
+                <mat-label>Guest:</mat-label>
+                <mat-select [(ngModel)]="ID" name="ID">
+                    <mat-option *ngFor='let guest of guests' [value]="guest.ID">{{guest.UserName}}, ID: {{guest.ID}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <br />
+            <mat-form-field>  
+                <mat-label>Pick a Room:</mat-label>
+                <mat-select [(ngModel)]="RoomID" name="roomID">
+                    <mat-option *ngFor='let room of rooms' [value]="room.ID">{{room.RoomName}}, ${{room.DailyRate}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <br /> 
+            <label>Pick a Date:</label><br />
+            <input [matDatepicker]="datePicker" [(ngModel)]="date" name="date">
+            <mat-datepicker-toggle [for]="datePicker"></mat-datepicker-toggle>
+            <mat-datepicker #datePicker></mat-datepicker>  
+         <br />
+        <button type="submit" class="btn btn-success">Save</button>
+    </div>
+</div>
+</form>

@@ -1,21 +1,50 @@
-<h2>Add / Modify Tavern</h2>
+<h2>{{ isNew ? 'Add' : 'Edit'}} Room</h2>
 
-
-<form #form="ngForm" (submit)=add_Room(form)>
+<form [formGroup] = "tavernForm" (submit)="editRoom()">
     <div class="row">
         <div class="col-md-6">
             <label>Room Name</label>
-            <input type="text" maxlength="100" class="form-control" name="RoomName" ngModel #RoomName="ngModel" required>
-            <div *ngIf="RoomName.invalid && (RoomName.dirty || RoomName.touched)" class="alert alert-danger">
-                <div *ngIf="RoomName.errors.required"> Name is Required!! </div>
-            </div>  
-            <label>Daily Rate</label>
-            <input type="text" class="form-control" name="DailyRate" ngModel #DailyRate="ngModel" required>
-            <div *ngIf="DailyRate.invalid && (DailyRate.dirty || DailyRate.touched)" class="alert alert-danger">
-                <div *ngIf="DailyRate.errors.required"> Rate is Required!! </div>
-            </div>  
+            <input 
+                type="text" 
+                maxlength="100" 
+                class="form-control"
+                formControlName="RoomName"
+            >
+            <div
+            *ngIf="
+                tavernForm.controls.RoomName.invalid &&
+                (tavernForm.controls.RoomName.dirty ||
+                    tavernForm.controls.RoomName.touched)
+            "
+            class="alert alert-danger"
+        >
+            <div *ngIf="tavernForm.controls.RoomName.errors.required">
+                Name is Required.
+            </div>
+            <div *ngIf="tavernForm.controls.RoomName.errors.maxlength">
+                Max length for Name is 100.
+            </div>
         </div>
-    </div> 
-    <button type="submit" class="btn btn-success" style = "margin: 20px 0px;">Save</button>
-    <button class="btn btn-secondary" style = "margin: 20px 20px;">Cancel</button>
+        <label>Daily Rate</label>
+            <input 
+                type="text" 
+                class="form-control"
+                formControlName="DailyRate"
+            >
+            <div
+            *ngIf="
+                tavernForm.controls.DailyRate.invalid &&
+                (tavernForm.controls.DailyRate.dirty ||
+                    tavernForm.controls.DailyRate.touched)
+            "
+            class="alert alert-danger"
+        >
+            <div *ngIf="tavernForm.controls.DailyRate.errors.required">
+                Rate is Required.
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<button type="submit" class="btn btn-success">Save</button>
 </form>

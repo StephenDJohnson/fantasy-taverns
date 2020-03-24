@@ -35,11 +35,10 @@ getTavern = async function(req, res) {
     res.setHeader('Content-Type', 'application/json');
 
     const pool = await poolPromise;
-
     try {
         tavern = await pool
             .request()
-            .input('UserId', sql.Int, 6)
+            .input('UserId', sql.Int, req.user.ID)
             .input('RoomName', sql.VarChar, req.query.search)
             .query(
                 // eslint-disable-next-line quotes
@@ -54,3 +53,56 @@ getTavern = async function(req, res) {
 };
 
 module.exports.getTavern = getTavern;
+
+getById = async function(req, res) {
+
+
+    let roomId = parseInt(req.params.roomId);
+    res.setHeader('Content-Type', 'application/json');
+    let roomPool;
+    let room;
+    const pool = await poolPromise;
+
+    try {
+        roomPool = await pool
+            .request()
+            .input('Id', sql.Int, roomId)
+            .query(
+                // eslint-disable-next-line quotes
+                `Select * FROM rooms Where Id = @Id`
+            );
+        room = roomPool.recordset.shift();
+    } catch (e) {
+        returnError(res, e, 500);
+    }
+
+    return returnSuccessResponse(res, room, 200);
+};
+
+module.exports.getById = getById;
+
+getRooms = async function (req, res) {
+    // format request
+
+    let rooms;
+
+    res.setHeader('Content-Type', 'application/json');
+
+    const pool = await poolPromise;
+
+    try {
+        rooms = await pool
+            .request()
+            .query(
+                // eslint-disable-next-line quotes
+                `select * from Rooms Order By DailyRate Desc`,
+            );
+        rooms = rooms.recordset;
+    } catch (e) {
+        returnError(res, e, 500);
+    }
+
+    return res.json(rooms);
+};
+
+module.exports.getRooms = getRooms;

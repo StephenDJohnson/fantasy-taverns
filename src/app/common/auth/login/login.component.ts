@@ -10,7 +10,8 @@ import { TavernsService, ITavern } from '../../../Taverns/taverns.service';
 export class LoginComponent implements OnInit, OnDestroy {
     userName = '';
     password = '';
-    tavern = '';
+    tavern: ITavern;
+    tavernName = '';
     // create var for new required fields
     showSignup = false;
     checked = false;
@@ -22,13 +23,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         //checkbox toggles admin checkbox and assigns role to 1 if user is admin
     checkbox(): void {
         this.checked = !this.checked;
-        this.tavern = '';
-        if (this.checked == false){
-            this.role = 2;
-        }
-        else {
-            this.role = 1;
-    }
+        this.tavernName = '';
     }
 
     ngOnInit(): void {
@@ -45,7 +40,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.showSignup = !this.showSignup;
     this.userName = '';
     this.password = '';
-    this.tavern = '';
+    this.tavernName = '';
     this.checked = false;
    
     }
@@ -54,8 +49,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         const payload = {
             UserName: this.userName,
             Password: this.password,
-            Tavern: this.tavern,
-            RoleId: this.role
+            Tavern: this.tavern
         };
         console.log(payload);
         
@@ -64,7 +58,6 @@ export class LoginComponent implements OnInit, OnDestroy {
                 if (user) {
                     this.toggleSignup();
                     console.log('Successfuly Signed Up!');
-                    
                 }
             },
         (error) => {
@@ -77,7 +70,7 @@ export class LoginComponent implements OnInit, OnDestroy {
             (response) => {
                 if (response.success) {
                     console.log('successful login');
-                    this.router.navigateByUrl('/home');
+                    this.router.navigateByUrl('/my-tavern');
                 }
             },
             (error) => {

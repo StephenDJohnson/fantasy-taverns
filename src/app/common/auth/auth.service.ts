@@ -9,7 +9,7 @@ export interface IUser {
     Id: number;
     UserName: string;
     TavernId: string;
-    RoleId: number;
+    RoleID: number;
 }
 
 export interface ILoginResponse {

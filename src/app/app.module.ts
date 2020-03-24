@@ -1,6 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { MatDatepickerModule, MatNativeDateModule } from '@angular/material';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -14,16 +17,23 @@ import { TokenInterceptor } from './common/auth/token.interceptor';
 import { HomeComponent } from './home.component';
 import { TavernsModule } from './Taverns/taverns.module';
 import { TavernInfoComponent } from './Taverns/tavern-info.component';
+import { GuestsComponent } from './guests/guests.component';
+import { TavernHeaderComponent } from './Taverns/tavern-header.component';
 
 @NgModule({
     bootstrap: [AppComponent],
-    declarations: [AppComponent, LoginComponent, HomeComponent, TavernInfoComponent],
+    declarations: [AppComponent, LoginComponent, HomeComponent, TavernInfoComponent, GuestsComponent, TavernHeaderComponent],
     imports: [
         BrowserModule,
         BrowserAnimationsModule,
+        MatFormFieldModule,
+        MatSelectModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
         FormsModule,
         HttpClientModule,
         NgbModule,
+        ReactiveFormsModule,
         TavernsModule,
         AppRoutingModule,
         CookieModule.forRoot(),
