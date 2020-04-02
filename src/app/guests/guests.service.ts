@@ -15,6 +15,7 @@ export interface IRoomInfo {
   RoomStatus: number;
   TavernID: number;
   ID: number;
+  StayDateStart: any;
 }
 
 @Injectable({
@@ -24,6 +25,10 @@ export interface IRoomInfo {
 export class GuestsService {
 
   constructor(private http: HttpClient) { }
+
+  addStay(stay): Observable<any>{
+    return this.http.post('http://localhost:3000/roomstays', stay);
+  }
 
   getGuests(): Observable<IGuest[]> {
     return this.http.get<IGuest[]> ('http://localhost:3000/users');

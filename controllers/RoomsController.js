@@ -15,7 +15,7 @@ getRooms = async function(req, res) {
             .request()
             .query(
                 // eslint-disable-next-line quotes
-                `select * from Rooms`,
+                `select r.ID, r.RoomName, r.DailyRate, r.TavernID, r.RoomStatus, StayDateStart FROM Rooms r Full Join Roomstays s on (s.RoomID = r.ID)`,
             );
         rooms = rooms.recordset;
     } catch (e) {
@@ -26,6 +26,7 @@ getRooms = async function(req, res) {
 };
 
 module.exports.getRooms = getRooms;
+
 
 const addRoom = async function(req, res) {
     res.setHeader('ContentType', 'application/json');

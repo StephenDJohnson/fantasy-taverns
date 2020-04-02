@@ -96,7 +96,7 @@ app.get(
 app.get(
     '/rooms/book', 
     passport.authenticate('jwt', { session: false }),
-    tavernController.getRooms,
+    roomController.getRooms,
     ); 
 
 app.get(
@@ -110,6 +110,12 @@ app.get(
 passport.authenticate('jwt', { session: false }),
 guestController.getGuests,
 ); 
+
+app.post(
+    '/roomstays', 
+    passport.authenticate('jwt', { session: false }),
+    guestController.addStay,
+    );
 
 
 

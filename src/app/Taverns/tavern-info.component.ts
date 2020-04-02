@@ -55,7 +55,8 @@ export class TavernInfoComponent implements OnInit {
         DailyRate: parseFloat(String(this.tavernForm.value.DailyRate)),
         RoomStatus: 0,
         ID: +roomId,
-        TavernID: +this.tavern[0].ID[0]
+        TavernID: +this.tavern[0].ID[0],
+        StayDateStat: ''
       };
       console.log(payload);
    this.roomService.saveRoom(payload).subscribe((room: IRoom) => {
